@@ -3,123 +3,148 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Spring 2025 Exhibition – Kalmady Art</title>
+  <title>Spring 2025 Exhibition – Sunil Kalmady</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
   <style>
     body {
-      margin: 0;
       font-family: 'Playfair Display', serif;
-      background-color: #ffffff;
-      color: #1a1a1a;
-      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+      background-color: #fefefe;
+      color: #111;
     }
     section {
-      padding: 10vh 10vw;
-      min-height: 100vh;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .fade {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 1.5s ease-out, transform 1.5s ease-out;
-    }
-    .fade.visible {
-      opacity: 1;
-      transform: none;
-    }
-    .hero {
-      background: #f5f5f5;
-      text-align: center;
-    }
-    .hero h1 {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      max-width: 700px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-    .artwork-section {
       display: flex;
       flex-wrap: wrap;
       gap: 5vw;
-      align-items: center;
       padding: 8vh 5vw;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease-out;
     }
-    .artwork-image img {
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    img {
       width: 100%;
       border-radius: 16px;
     }
-    .footer {
+    .text-block {
+      flex: 1;
+      min-width: 300px;
+    }
+    .image-block {
+      flex: 1;
+      min-width: 300px;
+    }
+    .intro, .outro {
       text-align: center;
-      padding: 2rem;
+      padding: 15vh 5vw;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    footer {
+      text-align: center;
+      padding: 4vh 5vw;
       font-size: 0.9rem;
-      color: #888;
+      color: #999;
     }
   </style>
 </head>
 <body>
-  <section class="hero fade">
-    <h1>Spring 2025 Exhibition</h1>
-    <p>A quiet walk through light, memory, and the intimate architectures of emotion. Each canvas a room. Each brushstroke a breath.</p>
-  </section>
 
-  <section class="artwork-section fade">
-    <div style="flex: 1; min-width: 300px;">
+  <!-- Exhibition Intro -->
+  <div class="intro">
+    <h1>Spring 2025 Exhibition</h1>
+    <p>
+      A virtual gallery of reflections—brushstrokes, memory, and light.  
+      These are not just paintings; they are the soft echoes of places, paused moments, and unspoken stories.
+    </p>
+  </div>
+
+  <!-- Painting 1: Image Left, Text Right -->
+  <section>
+    <div class="image-block">
       <img src="https://images.squarespace-cdn.com/content/66120ea972ecf22fb3fe3cf7/1713570895671-SLOEF3EH3074HVP3KTBB/20240401_155923.jpg?content-type=image%2Fjpeg" alt="The River Forgets Nothing" />
     </div>
-    <div style="flex: 1; min-width: 300px;">
+    <div class="text-block">
       <h2>“The River Forgets Nothing”</h2>
-      <p>A slow-burning memory rendered in ochre and blue. This piece is an invocation of forgotten banks and floral ghosts—where abstraction meets the trace of a landscape. The brush doesn’t remember, but the pigment does.</p>
+      <p>
+        A slow-burning memory rendered in ochre and blue. This piece is an invocation of forgotten banks and floral ghosts—
+        where abstraction meets the trace of a landscape. The brush doesn’t remember, but the pigment does.
+      </p>
     </div>
   </section>
 
-  <section class="artwork-section fade">
-    <div style="flex: 1; min-width: 300px;">
+  <!-- Painting 2: Text Left, Image Right -->
+  <section>
+    <div class="text-block">
       <h2>“The Sky Above Château Laurier”</h2>
-      <p>A fleeting impression of Ottawa's iconic castle-like silhouette, suspended beneath a dream-blue sky. The architecture dissolves into memory—painted not as it is, but as it’s felt in a glance or a gust of wind.</p>
+      <p>
+        A fleeting impression of Ottawa's iconic castle-like silhouette, suspended beneath a dream-blue sky.
+        The architecture dissolves into memory—painted not as it is, but as it’s felt in a glance or a gust of wind.
+      </p>
     </div>
-    <div style="flex: 1; min-width: 300px;">
+    <div class="image-block">
       <img src="https://images.squarespace-cdn.com/content/66120ea972ecf22fb3fe3cf7/1716404648100-JCIMWT6GAO4LJRTKTDF7/20240402_152956.jpg?content-type=image%2Fjpeg" alt="The Sky Above Château Laurier" />
     </div>
   </section>
 
-  <section class="artwork-section fade">
-    <div style="flex: 1; min-width: 300px;">
-      <h2>“Rooms We’ll Never Know”</h2>
-      <p>The building breathes in silence. Behind yellow-lit windows, unseen lives flicker—readers, dreamers, the last cup of tea. A study of presence in absence. A meditation on the warm glow of the unknown.</p>
-    </div>
-    <div style="flex: 1; min-width: 300px;">
+  <!-- Painting 3: Image Left, Text Right -->
+  <section>
+    <div class="image-block">
       <img src="https://images.squarespace-cdn.com/content/66120ea972ecf22fb3fe3cf7/1716404600505-FB5LD3C1GW8OZWR126MA/20240402_151953.jpg?content-type=image%2Fjpeg" alt="Rooms We'll Never Know" />
     </div>
+    <div class="text-block">
+      <h2>“Rooms We’ll Never Know”</h2>
+      <p>
+        The building breathes in silence. Behind yellow-lit windows, unseen lives flicker—readers, dreamers, the last cup of tea.
+        A study of presence in absence. A meditation on the warm glow of the unknown.
+      </p>
+    </div>
   </section>
 
-  <section class="footer fade">
-    &copy; 2025 Kalmady Art – A virtual curation by Sunil Kalmady<br>
-    <span style="font-size: 0.85rem;">Thank you for walking through this silence.</span>
-  </section>
+  <!-- Outro -->
+  <div class="outro">
+    <p>
+      Thank you for walking through this quiet world with me.<br />
+      May these paintings linger like thoughts that return in silence.
+    </p>
+  </div>
 
+  <footer>
+    &copy; 2025 Sunil Kalmady – All works © the artist
+  </footer>
+
+  <!-- Scroll Animation Script -->
   <script>
-    const faders = document.querySelectorAll('.fade');
-    const appearOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -100px 0px'
-    };
-
-    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      });
-    }, appearOptions);
-
-    faders.forEach(fader => {
-      appearOnScroll.observe(fader);
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll("section").forEach(section => {
+      observer.observe(section);
     });
   </script>
 </body>
