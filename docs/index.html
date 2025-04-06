@@ -13,20 +13,20 @@
       background-color: #fefefe;
       color: #111;
     }
-    section {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5vw;
+     section {
       padding: 8vh 5vw;
-      align-items: center;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 1s ease-out;
+      font-family: 'Playfair Display', serif;
     }
-    section.visible {
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
+
     .dot {
       width: 18px;
       height: 18px;
@@ -101,15 +101,12 @@
       font-size: 0.9rem;
       color: #999;
     }
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 1s ease, transform 1s ease;
+    @media (max-width: 768px) {
+    .image-block, .text-block {
+      flex: 100%;
+      min-width: 100%;
     }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  }
 
   </style>
 </head>
@@ -169,12 +166,20 @@
       const revealElements = document.querySelectorAll('.reveal');
       const revealObserver = new IntersectionObserver(
         entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              revealObserver.unobserve(entry.target);
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+        
+            // 🔵 Show the dot inside the reveal block
+            const dot = entry.target.querySelector('.dot');
+            if (dot) {
+              dot.style.opacity = 1;
             }
-          });
+        
+            observer.unobserve(entry.target);
+          }
+        });
+
         },
         { threshold: 0.1 }
       );
@@ -337,22 +342,5 @@ function revealSectionsOneByOne() {
     &copy; 2025 Sunil Kalmady – All works © the artist
   </footer>
 
-  <!-- Scroll Animation Script -->
-  <script>
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll("section").forEach(section => {
-      observer.observe(section);
-    });
-  </script>
 </body>
 </html>
