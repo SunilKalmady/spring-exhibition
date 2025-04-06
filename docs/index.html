@@ -105,18 +105,54 @@
   </section>
 
   <!-- Painting 3: Image Left, Text Right -->
-  <section>
-    <div class="image-block">
-      <img src="https://images.squarespace-cdn.com/content/66120ea972ecf22fb3fe3cf7/1716404600505-FB5LD3C1GW8OZWR126MA/20240402_151953.jpg?content-type=image%2Fjpeg" alt="Rooms We'll Never Know" />
-    </div>
-    <div class="text-block">
-      <h2>“Rooms We’ll Never Know”</h2>
-      <p>
-        The building breathes in silence. Behind yellow-lit windows, unseen lives flicker—readers, dreamers, the last cup of tea.
-        A study of presence in absence. A meditation on the warm glow of the unknown.
-      </p>
-    </div>
-  </section>
+<!-- 🎧 Background Audio (optional toggle) -->
+<div style="position: fixed; top: 1rem; right: 1rem; z-index: 999;">
+  <button onclick="toggleAudio()" style="background: #fff; border: 1px solid #ccc; padding: 6px 12px; font-family: 'Playfair Display'; cursor: pointer;">
+    🔊 Ambient Sound
+  </button>
+</div>
+<audio id="ambientAudio" autoplay loop style="display: none;">
+  <source src="https://sunilkalmady.github.io/spring-exhibition/meditative-chill-relaxing-ambient-nature-194369.mp3" type="audio/mpeg" />
+</audio>
+
+<!-- 🎨 Artwork Section with Zoom & Floating Curator Text -->
+<section style="display: flex; flex-wrap: wrap; gap: 5vw; padding: 12vh 5vw; font-family: 'Playfair Display', serif; align-items: center; position: relative; background-color: #f7f7f7;">
+  <!-- Floating Curator Text -->
+  <div style="position: absolute; top: 2rem; left: 3rem; font-size: 1rem; color: #888; opacity: 0.7;">
+    “Based on an evening walk past Rideau Street...”
+  </div>
+
+  <!-- Image -->
+  <div style="flex: 1; min-width: 300px;">
+    <img src="https://images.squarespace-cdn.com/content/66120ea972ecf22fb3fe3cf7/1716404600505-FB5LD3C1GW8OZWR126MA/20240402_151953.jpg?content-type=image%2Fjpeg"
+         alt="Rooms We'll Never Know"
+         style="width: 100%; border-radius: 16px; transition: transform 0.3s ease; cursor: zoom-in;"
+         onmouseover="this.style.transform='scale(1.02)';"
+         onmouseout="this.style.transform='scale(1)';"
+    />
+  </div>
+
+  <!-- Text -->
+  <div style="flex: 1; min-width: 300px;">
+    <h2 style="font-size: 2rem; margin-bottom: 1rem;">“Rooms We’ll Never Know”</h2>
+    <p style="font-size: 1rem; line-height: 1.6;">
+      The building breathes in silence. Behind yellow-lit windows, unseen lives flicker—readers, dreamers, the last cup of tea.  
+      A study of presence in absence. A meditation on the warm glow of the unknown.
+    </p>
+  </div>
+</section>
+
+<!-- 🔊 Audio Toggle Script -->
+<script>
+  const audio = document.getElementById("ambientAudio");
+  function toggleAudio() {
+    if (audio.paused) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+  }
+</script>
 
   <!-- Outro -->
   <div class="outro">
