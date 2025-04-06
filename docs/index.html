@@ -39,10 +39,35 @@
       background: #f59e0b; /* Amber */
       box-shadow: 0 0 8px #f59e0b;
     }
-    .dot {
-      opacity: 0;
-      transition: opacity 1s ease;
-    }
+    
+.dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  margin: 0 auto;
+  opacity: 0;
+  animation: none;
+}
+
+section:nth-of-type(1) .dot {
+  background: #8b5cf6;
+  box-shadow: 0 0 20px #8b5cf6;
+}
+section:nth-of-type(2) .dot {
+  background: #22d3ee;
+  box-shadow: 0 0 20px #22d3ee;
+}
+section:nth-of-type(3) .dot {
+  background: #f59e0b;
+  box-shadow: 0 0 20px #f59e0b;
+}
+
+@keyframes dotPulse {
+  0%   { transform: scale(1); box-shadow: 0 0 12px currentColor; }
+  50%  { transform: scale(1.4); box-shadow: 0 0 24px currentColor; }
+  100% { transform: scale(1); box-shadow: 0 0 12px currentColor; }
+}
+
     img {
       width: 100%;
       border-radius: 16px;
@@ -146,6 +171,7 @@ function revealSectionsOneByOne() {
       const dot = section.querySelector(".dot");
       if (dot) {
         dot.style.opacity = 1;
+        dot.style.animation = "dotPulse 2s infinite ease-in-out";
       }
     }, delay + index * 800);
   });
@@ -188,6 +214,10 @@ function revealSectionsOneByOne() {
 
   <!-- Painting 1: Image Left, Text Right -->
   <section>
+      <!-- Glowing Dot Above Title -->
+  <div class="wayfinding-dot" style="text-align: center; margin-bottom: 1.5rem;">
+    <div class="dot"></div>
+  </div>
     <div class="image-block">
       <img src="https://images.squarespace-cdn.com/content/66120ea972ecf22fb3fe3cf7/1713570895671-SLOEF3EH3074HVP3KTBB/20240401_155923.jpg?content-type=image%2Fjpeg" alt="The River Forgets Nothing" />
     </div>
@@ -198,13 +228,13 @@ function revealSectionsOneByOne() {
         where abstraction meets the trace of a landscape. The brush doesn’t remember, but the pigment does.
       </p>
     </div>
-    <div class="wayfinding-dot" style="margin-top: 2rem; text-align: center;">
-  <div class="dot" style="width: 10px; height: 10px; border-radius: 50%; margin: auto;"></div>
-    </div>
   </section>
 
   <!-- Painting 2: Text Left, Image Right -->
   <section>
+          <!-- Glowing Dot Above Title -->
+    <div class="wayfinding-dot" style="text-align: center; margin-bottom: 1.5rem;">
+    <div class="dot"></div>
     <div class="text-block">
       <h2>“The Sky Above Château Laurier”</h2>
       <p>
@@ -215,14 +245,15 @@ function revealSectionsOneByOne() {
     <div class="image-block">
       <img src="https://images.squarespace-cdn.com/content/66120ea972ecf22fb3fe3cf7/1716404648100-JCIMWT6GAO4LJRTKTDF7/20240402_152956.jpg?content-type=image%2Fjpeg" alt="The Sky Above Château Laurier" />
     </div>
-    <div class="wayfinding-dot" style="margin-top: 2rem; text-align: center;">
-  <div class="dot" style="width: 10px; height: 10px; border-radius: 50%; margin: auto;"></div>
-    </div>
   </section>
 
   <!-- Painting 3: Image Left, Text Right -->
 <!-- 🎨 Artwork Section with Zoom & Floating Curator Text -->
 <section style="display: flex; flex-wrap: wrap; gap: 5vw; padding: 12vh 5vw; font-family: 'Playfair Display', serif; align-items: center; position: relative; background-color: #f7f7f7;">
+    <!-- Glowing Dot Above Title -->
+  <div class="wayfinding-dot" style="text-align: center; margin-bottom: 1.5rem;">
+    <div class="dot"></div>
+  
   <!-- Floating Curator Text -->
   <div style="position: absolute; top: 2rem; left: 3rem; font-size: 1rem; color: #888; opacity: 0.7;">
     “Based on an evening walk past Rideau Street...”
@@ -246,9 +277,6 @@ function revealSectionsOneByOne() {
       A study of presence in absence. A meditation on the warm glow of the unknown.
     </p>
   </div>
-
-  <div class="wayfinding-dot" style="margin-top: 2rem; text-align: center;">
-  <div class="dot" style="width: 10px; height: 10px; border-radius: 50%; margin: auto;"></div>
 </div>
   
 </section>
