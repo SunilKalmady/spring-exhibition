@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spring 2025 Exhibition – Sunil Kalmady</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Playfair Display', serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fefefe;
+      color: #111;
+    }
+    section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5vw;
+      padding: 8vh 5vw;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 1s ease-out;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      margin: 0 auto;
+      opacity: 0;
+      animation: dotPulse 2s infinite ease-in-out;
+    }
+    section:nth-of-type(1) .dot {
+      background: #8b5cf6;
+      box-shadow: 0 0 20px #8b5cf6;
+    }
+    section:nth-of-type(2) .dot {
+      background: #22d3ee;
+      box-shadow: 0 0 20px #22d3ee;
+    }
+    section:nth-of-type(3) .dot {
+      background: #f59e0b;
+      box-shadow: 0 0 20px #f59e0b;
+    }
+
+    @keyframes dotPulse {
+      0%   { transform: scale(1); box-shadow: 0 0 12px currentColor; }
+      50%  { transform: scale(1.4); box-shadow: 0 0 24px currentColor; }
+      100% { transform: scale(1); box-shadow: 0 0 12px currentColor; }
+    }
+    
+    @keyframes pulseSplash {
+      0% {
+        transform: scale(1); box-shadow: 0 0 12px #4a74f8;
+      }
+      50% {transform: scale(1.5); box-shadow: 0 0 24px #4a74f8;
+      }
+      100% {
+        transform: scale(1); box-shadow: 0 0 12px #4a74f8;
+      }
+    }
+
+    img {
+      width: 100%;
+      border-radius: 16px;
+    }
+    .text-block {
+      flex: 1;
+      min-width: 300px;
+    }
+    .image-block {
+      flex: 1;
+      min-width: 300px;
+    }
+    .intro, .outro {
+      text-align: center;
+      padding: 15vh 5vw;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    footer {
+      text-align: center;
+      padding: 4vh 5vw;
+      font-size: 0.9rem;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔊 Ambient Audio Setup -->
+<audio id="ambientAudio" loop>
+  <source src="https://media.vocaroo.com/mp3/11zcsDhT65A0" type="audio/mpeg" />
+</audio>
+
+<!-- Splash: Modern Aesthetic with Glowing Dot + Mini Gallery Strip -->
+<div id="splash" style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: #fdfdfd; display: flex; align-items: center; justify-content: center; z-index: 9999; flex-direction: column; font-family: 'Playfair Display', serif; text-align: center; padding: 2rem;">
+  
+  <h1 style="font-size: 2.8rem; margin-bottom: 0.5rem;">Spring 2025 Exhibition</h1>
+  <p style="font-size: 1.2rem; color: #555;">a quiet walk through light and brush</p>
+  
+  <!-- Glowing Dot with Radial Gradient -->
+<div id="audioPulse" style="
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin: 1.5rem auto;
+  background: radial-gradient(circle, #fff 40%, #4a74f8 100%);
+  box-shadow: 0 0 24px #4a74f8;
+  animation: pulseSplash 2s infinite ease-in-out;
+"></div>
+
+  <!-- Mini gallery strip -->
+  <div style="display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 2rem; opacity: 0.9;">
+    <img src="https://images.squarespace-cdn.com/content/66120ea972ecf22fb3fe3cf7/1716404600505-FB5LD3C1GW8OZWR126MA/20240402_151953.jpg?content-type=image%2Fjpeg" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;" />
+    <img src="https://images.squarespace-cdn.com/content/66120ea972ecf22fb3fe3cf7/1716404648100-JCIMWT6GAO4LJRTKTDF7/20240402_152956.jpg?content-type=image%2Fjpeg" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;" />
+    <img src="https://images.squarespace-cdn.com/content/66120ea972ecf22fb3fe3cf7/1713570895671-SLOEF3EH3074HVP3KTBB/20240401_155923.jpg?content-type=image%2Fjpeg" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;" />
+  </div>
+
+  <!-- Enter button -->
+  <button onclick="startExhibition()" style="padding: 0.75rem 1.5rem; font-size: 1rem; cursor: pointer; font-family: 'Playfair Display'; border: 1px solid #ccc; background: #fff;">
+    Enter & Play Sound 🔊
+  </button>
+</div>
+
+
+<!-- 🔘 Floating Audio Status Indicator -->
+<div id="audioIndicator" style="position: fixed; top: 1rem; right: 1rem; width: 12px; height: 12px; background: #36c; border-radius: 50%; box-shadow: 0 0 8px #36c; z-index: 9998; display: none;"></div>
+
+<script>
+  const splash = document.getElementById("splash");
+  const audio = document.getElementById("ambientAudio");
+  const indicator = document.getElementById("audioIndicator");
+  const pulseDot = document.getElementById("audioPulse");
+
+  function startExhibition() {
+  splash.style.transition = "opacity 1.5s ease";
+  splash.style.opacity = 0;
+
+  setTimeout(() => {
+    splash.style.display = "none";
+    audio.play();
+
+    if (indicator) indicator.style.display = "block";
+    document.getElementById("muteToggle").style.display = "block";
+    pulseAudioIndicator();
+    revealSectionsOneByOne();
+  }, 1600);
+}
+
+function revealSectionsOneByOne() {
+  const sections = document.querySelectorAll("section");
+  let delay = 500;
+
+  sections.forEach((section, index) => {
+    setTimeout(() => {
+      section.style.opacity = 1;
+      section.style.transform = "translateY(0)";
+      const dot = section.querySelector(".dot");
+      if (dot) {
+        dot.style.opacity = 1;
+        dot.style.animation = "dotPulse 2s infinite ease-in-out";
+      }
+    }, delay + index * 800);
+  });
+}
+
+  function pulseAudioIndicator() {
+    pulseDot.animate([
+      { boxShadow: '0 0 6px #4a74f8' },
+      { boxShadow: '0 0 16px #4a74f8' },
+      { boxShadow: '0 0 6px #4a74f8' }
+    ], {
+      duration: 2000,
+      iterations: Infinity
+    });
+  }
+
+  function toggleMute() {
+  const btn = document.querySelector("#muteToggle button");
+  if (audio.muted) {
+    audio.muted = false;
+    btn.textContent = "🔇 Mute Audio";
+  } else {
+    audio.muted = true;
+    btn.textContent = "🔊 Unmute Audio";
+  }
+}
+
+</script>
+  
+
+
+  <!-- Exhibition Intro -->
+  <div class="intro">
+    <h1>Spring 2025 Exhibition</h1>
+    <p>
+      A virtual gallery of reflections—brushstrokes, memory, and light.  
+      These are not just paintings; they are the soft echoes of places, paused moments, and unspoken stories.
+    </p>
+  </div>
+
+<!-- Painting 1: Image Left, Text Right -->
+<section style="padding: 12vh 5vw; font-family: 'Playfair Display', serif;">
+  <div style="display: flex; flex-wrap: wrap; gap: 5vw; align-items: flex-start;">
+    <!-- Image -->
+    <div class="image-block" style="flex: 1; min-width: 300px;">
+      <img src="https://images.squarespace-cdn.com/content/66120ea972ecf22fb3fe3cf7/1713570895671-SLOEF3EH3074HVP3KTBB/20240401_155923.jpg?content-type=image%2Fjpeg"
+           alt="The River Forgets Nothing"
+           style="width: 100%; border-radius: 16px;" />
+    </div>
+    <!-- Text Block -->
+    <div class="text-block" style="flex: 1; min-width: 300px;">
+      <div class="wayfinding-dot" style="text-align: center; margin-bottom: 1rem;">
+        <div class="dot"></div>
+      </div>
+      <h2 style="font-size: 2rem; text-align: center;">“The River Forgets Nothing”</h2>
+      <p style="font-size: 1rem; line-height: 1.6; margin-top: 1rem;">
+        A slow-burning memory rendered in ochre and blue. This piece is an invocation of forgotten banks and floral ghosts—
+        where abstraction meets the trace of a landscape. The brush doesn’t remember, but the pigment does.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Painting 2: Text Left, Image Right -->
+<section style="padding: 12vh 5vw; font-family: 'Playfair Display', serif;">
+  <div style="display: flex; flex-wrap: wrap; gap: 5vw; align-items: flex-start;">
+    <!-- Text Block -->
+    <div class="text-block" style="flex: 1; min-width: 300px;">
+      <div class="wayfinding-dot" style="text-align: center; margin-bottom: 1rem;">
+        <div class="dot"></div>
+      </div>
+      <h2 style="font-size: 2rem; text-align: center;">“The Sky Above Château Laurier”</h2>
+      <p style="font-size: 1rem; line-height: 1.6; margin-top: 1rem;">
+        A fleeting impression of Ottawa's iconic castle-like silhouette, suspended beneath a dream-blue sky.
+        The architecture dissolves into memory—painted not as it is, but as it’s felt in a glance or a gust of wind.
+      </p>
+    </div>
+    <!-- Image -->
+    <div class="image-block" style="flex: 1; min-width: 300px;">
+      <img src="https://images.squarespace-cdn.com/content/66120ea972ecf22fb3fe3cf7/1716404648100-JCIMWT6GAO4LJRTKTDF7/20240402_152956.jpg?content-type=image%2Fjpeg"
+           alt="The Sky Above Château Laurier"
+           style="width: 100%; border-radius: 16px;" />
+    </div>
+  </div>
+</section>
+
+<!-- Painting 3: Image Left, Text Right -->
+<section style="padding: 12vh 5vw; font-family: 'Playfair Display', serif;">
+  <div style="display: flex; flex-wrap: wrap; gap: 5vw; align-items: flex-start;">
+    <!-- Image -->
+    <div class="image-block" style="flex: 1; min-width: 300px;">
+      <img src="https://images.squarespace-cdn.com/content/66120ea972ecf22fb3fe3cf7/1716404600505-FB5LD3C1GW8OZWR126MA/20240402_151953.jpg?content-type=image%2Fjpeg"
+           alt="Rooms We'll Never Know"
+           style="width: 100%; border-radius: 16px;" />
+    </div>
+    <!-- Text Block -->
+    <div class="text-block" style="flex: 1; min-width: 300px;">
+      <div class="wayfinding-dot" style="text-align: center; margin-bottom: 1rem;">
+        <div class="dot"></div>
+      </div>
+      <h2 style="font-size: 2rem; text-align: center;">“Rooms We’ll Never Know”</h2>
+      <p style="font-size: 1rem; line-height: 1.6; margin-top: 1rem;">
+        The building breathes in silence. Behind yellow-lit windows, unseen lives flicker—readers, dreamers, the last cup of tea.
+        A study of presence in absence. A meditation on the warm glow of the unknown.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+
+  <!-- 🔇 Mute/Unmute Toggle -->
+<div id="muteToggle" style="position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999; display: none;">
+  <button onclick="toggleMute()" style="background: #fff; border: 1px solid #ccc; padding: 6px 12px; font-family: 'Playfair Display'; cursor: pointer;">
+    🔇 Mute Audio
+  </button>
+</div>
+
+  <!-- Outro -->
+  <div class="outro">
+    <p>
+      Thank you for walking through this quiet world with me.<br />
+      May these paintings linger like thoughts that return in silence.
+    </p>
+  </div>
+
+  <footer>
+    &copy; 2025 Sunil Kalmady – All works © the artist
+  </footer>
+
+  <!-- Scroll Animation Script -->
+  <script>
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll("section").forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>
