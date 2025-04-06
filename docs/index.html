@@ -27,46 +27,43 @@
       opacity: 1;
       transform: translateY(0);
     }
+    .dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      margin: 0 auto;
+      opacity: 0;
+      animation: none;
+    }
     section:nth-of-type(1) .dot {
-    background: #8b5cf6; /* Violet */
-    box-shadow: 0 0 8px #8b5cf6;
+      background: #8b5cf6;
+      box-shadow: 0 0 20px #8b5cf6;
     }
     section:nth-of-type(2) .dot {
-      background: #22d3ee; /* Cyan */
-      box-shadow: 0 0 8px #22d3ee;
+      background: #22d3ee;
+      box-shadow: 0 0 20px #22d3ee;
     }
     section:nth-of-type(3) .dot {
-      background: #f59e0b; /* Amber */
-      box-shadow: 0 0 8px #f59e0b;
+      background: #f59e0b;
+      box-shadow: 0 0 20px #f59e0b;
+    }
+
+    @keyframes dotPulse {
+      0%   { transform: scale(1); box-shadow: 0 0 12px currentColor; }
+      50%  { transform: scale(1.4); box-shadow: 0 0 24px currentColor; }
+      100% { transform: scale(1); box-shadow: 0 0 12px currentColor; }
     }
     
-.dot {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  margin: 0 auto;
-  opacity: 0;
-  animation: none;
-}
-
-section:nth-of-type(1) .dot {
-  background: #8b5cf6;
-  box-shadow: 0 0 20px #8b5cf6;
-}
-section:nth-of-type(2) .dot {
-  background: #22d3ee;
-  box-shadow: 0 0 20px #22d3ee;
-}
-section:nth-of-type(3) .dot {
-  background: #f59e0b;
-  box-shadow: 0 0 20px #f59e0b;
-}
-
-@keyframes dotPulse {
-  0%   { transform: scale(1); box-shadow: 0 0 12px currentColor; }
-  50%  { transform: scale(1.4); box-shadow: 0 0 24px currentColor; }
-  100% { transform: scale(1); box-shadow: 0 0 12px currentColor; }
-}
+    @keyframes pulseSplash {
+      0% {
+        transform: scale(1); box-shadow: 0 0 12px #4a74f8;
+      }
+      50% {transform: scale(1.5); box-shadow: 0 0 24px #4a74f8;
+      }
+      100% {
+        transform: scale(1); box-shadow: 0 0 12px #4a74f8;
+      }
+    }
 
     img {
       width: 100%;
@@ -119,8 +116,16 @@ section:nth-of-type(3) .dot {
   <h1 style="font-size: 2.8rem; margin-bottom: 0.5rem;">Spring 2025 Exhibition</h1>
   <p style="font-size: 1.2rem; color: #555;">a quiet walk through light and brush</p>
   
-  <!-- Glowing dot -->
-  <div id="audioPulse" style="width: 12px; height: 12px; background: #4a74f8; border-radius: 50%; margin: 1.5rem auto; box-shadow: 0 0 12px #4a74f8;"></div>
+  <!-- Glowing Dot with Radial Gradient -->
+<div id="audioPulse" style="
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin: 1.5rem auto;
+  background: radial-gradient(circle, #fff 40%, #4a74f8 100%);
+  box-shadow: 0 0 24px #4a74f8;
+  animation: pulseSplash 2s infinite ease-in-out;
+"></div>
 
   <!-- Mini gallery strip -->
   <div style="display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 2rem; opacity: 0.9;">
@@ -213,73 +218,77 @@ function revealSectionsOneByOne() {
   </div>
 
   <!-- Painting 1: Image Left, Text Right -->
-  <section>
-      <!-- Glowing Dot Above Title -->
-  <div class="wayfinding-dot" style="text-align: center; margin-bottom: 1.5rem;">
+<section>
+  <!-- Glowing Dot + Title (vertically stacked) -->
+  <div style="width: 100%; text-align: center; margin-bottom: 2rem;">
     <div class="dot"></div>
+    <h2 style="font-size: 2rem; margin-top: 1rem;">“The River Forgets Nothing”</h2>
   </div>
-    <div class="image-block">
-      <img src="https://images.squarespace-cdn.com/content/66120ea972ecf22fb3fe3cf7/1713570895671-SLOEF3EH3074HVP3KTBB/20240401_155923.jpg?content-type=image%2Fjpeg" alt="The River Forgets Nothing" />
+
+  <!-- Horizontal layout: image left, text right -->
+  <div style="display: flex; flex-wrap: wrap; gap: 5vw; align-items: center;">
+    <div class="image-block" style="flex: 1; min-width: 300px;">
+      <img src="https://images.squarespace-cdn.com/content/66120ea972ecf22fb3fe3cf7/1713570895671-SLOEF3EH3074HVP3KTBB/20240401_155923.jpg?content-type=image%2Fjpeg"
+           alt="The River Forgets Nothing"
+           style="width: 100%; border-radius: 16px;" />
     </div>
-    <div class="text-block">
-      <h2>“The River Forgets Nothing”</h2>
-      <p>
+    <div class="text-block" style="flex: 1; min-width: 300px;">
+      <p style="font-size: 1rem; line-height: 1.6;">
         A slow-burning memory rendered in ochre and blue. This piece is an invocation of forgotten banks and floral ghosts—
         where abstraction meets the trace of a landscape. The brush doesn’t remember, but the pigment does.
       </p>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- Painting 2: Text Left, Image Right -->
-  <section>
-          <!-- Glowing Dot Above Title -->
-    <div class="wayfinding-dot" style="text-align: center; margin-bottom: 1.5rem;">
+<section>
+  <!-- Dot + Title Centered Above -->
+  <div style="width: 100%; text-align: center; margin-bottom: 2rem;">
     <div class="dot"></div>
-    <div class="text-block">
-      <h2>“The Sky Above Château Laurier”</h2>
-      <p>
+    <h2 style="font-size: 2rem; margin-top: 1rem;">“The Sky Above Château Laurier”</h2>
+  </div>
+
+  <!-- Text Left, Image Right -->
+  <div style="display: flex; flex-wrap: wrap; gap: 5vw; align-items: center;">
+    <div class="text-block" style="flex: 1; min-width: 300px;">
+      <p style="font-size: 1rem; line-height: 1.6;">
         A fleeting impression of Ottawa's iconic castle-like silhouette, suspended beneath a dream-blue sky.
         The architecture dissolves into memory—painted not as it is, but as it’s felt in a glance or a gust of wind.
       </p>
     </div>
-    <div class="image-block">
-      <img src="https://images.squarespace-cdn.com/content/66120ea972ecf22fb3fe3cf7/1716404648100-JCIMWT6GAO4LJRTKTDF7/20240402_152956.jpg?content-type=image%2Fjpeg" alt="The Sky Above Château Laurier" />
+    <div class="image-block" style="flex: 1; min-width: 300px;">
+      <img src="https://images.squarespace-cdn.com/content/66120ea972ecf22fb3fe3cf7/1716404648100-JCIMWT6GAO4LJRTKTDF7/20240402_152956.jpg?content-type=image%2Fjpeg"
+           alt="The Sky Above Château Laurier"
+           style="width: 100%; border-radius: 16px;" />
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- Painting 3: Image Left, Text Right -->
-<!-- 🎨 Artwork Section with Zoom & Floating Curator Text -->
-<section style="display: flex; flex-wrap: wrap; gap: 5vw; padding: 12vh 5vw; font-family: 'Playfair Display', serif; align-items: center; position: relative; background-color: #f7f7f7;">
-    <!-- Glowing Dot Above Title -->
-  <div class="wayfinding-dot" style="text-align: center; margin-bottom: 1.5rem;">
+<section style="padding: 12vh 5vw; font-family: 'Playfair Display', serif; background-color: #f7f7f7;">
+  <!-- Glowing Dot + Title -->
+  <div style="width: 100%; text-align: center; margin-bottom: 2rem;">
     <div class="dot"></div>
-  
-  <!-- Floating Curator Text -->
-  <div style="position: absolute; top: 2rem; left: 3rem; font-size: 1rem; color: #888; opacity: 0.7;">
-    “Based on an evening walk past Rideau Street...”
+    <h2 style="font-size: 2rem; margin-top: 1rem;">“Rooms We’ll Never Know”</h2>
   </div>
 
-  <!-- Image -->
-  <div style="flex: 1; min-width: 300px;">
-    <img src="https://images.squarespace-cdn.com/content/66120ea972ecf22fb3fe3cf7/1716404600505-FB5LD3C1GW8OZWR126MA/20240402_151953.jpg?content-type=image%2Fjpeg"
-         alt="Rooms We'll Never Know"
-         style="width: 100%; border-radius: 16px; transition: transform 0.3s ease; cursor: zoom-in;"
-         onmouseover="this.style.transform='scale(1.02)';"
-         onmouseout="this.style.transform='scale(1)';"
-    />
+  <!-- Horizontal layout: Image Left, Text Right -->
+  <div style="display: flex; flex-wrap: wrap; gap: 5vw; align-items: center;">
+    <div class="image-block" style="flex: 1; min-width: 300px;">
+      <img src="https://images.squarespace-cdn.com/content/66120ea972ecf22fb3fe3cf7/1716404600505-FB5LD3C1GW8OZWR126MA/20240402_151953.jpg?content-type=image%2Fjpeg"
+           alt="Rooms We'll Never Know"
+           style="width: 100%; border-radius: 16px;" />
+    </div>
+    <div class="text-block" style="flex: 1; min-width: 300px;">
+      <p style="font-size: 1rem; line-height: 1.6;">
+        The building breathes in silence. Behind yellow-lit windows, unseen lives flicker—readers, dreamers, the last cup of tea.  
+        A study of presence in absence. A meditation on the warm glow of the unknown.
+      </p>
+    </div>
   </div>
-
-  <!-- Text -->
-  <div style="flex: 1; min-width: 300px;">
-    <h2 style="font-size: 2rem; margin-bottom: 1rem;">“Rooms We’ll Never Know”</h2>
-    <p style="font-size: 1rem; line-height: 1.6;">
-      The building breathes in silence. Behind yellow-lit windows, unseen lives flicker—readers, dreamers, the last cup of tea.  
-      A study of presence in absence. A meditation on the warm glow of the unknown.
-    </p>
-  </div>
-</div>
-  
 </section>
+
 
   <!-- 🔇 Mute/Unmute Toggle -->
 <div id="muteToggle" style="position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999; display: none;">
