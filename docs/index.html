@@ -27,6 +27,22 @@
       opacity: 1;
       transform: translateY(0);
     }
+    section:nth-of-type(1) .dot {
+    background: #8b5cf6; /* Violet */
+    box-shadow: 0 0 8px #8b5cf6;
+    }
+    section:nth-of-type(2) .dot {
+      background: #22d3ee; /* Cyan */
+      box-shadow: 0 0 8px #22d3ee;
+    }
+    section:nth-of-type(3) .dot {
+      background: #f59e0b; /* Amber */
+      box-shadow: 0 0 8px #f59e0b;
+    }
+    .dot {
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
     img {
       width: 100%;
       border-radius: 16px;
@@ -63,7 +79,6 @@
       font-size: 0.9rem;
       color: #999;
     }
-    
   </style>
 </head>
 <body>
@@ -114,14 +129,13 @@
     audio.play();
 
     if (indicator) indicator.style.display = "block";
+    document.getElementById("muteToggle").style.display = "block";
     pulseAudioIndicator();
-
-    // Trigger sequential reveal
     revealSectionsOneByOne();
   }, 1600);
 }
 
-  function revealSectionsOneByOne() {
+function revealSectionsOneByOne() {
   const sections = document.querySelectorAll("section");
   let delay = 500;
 
@@ -129,10 +143,13 @@
     setTimeout(() => {
       section.style.opacity = 1;
       section.style.transform = "translateY(0)";
-    }, delay + index * 800); // Adjust delay between reveals
+      const dot = section.querySelector(".dot");
+      if (dot) {
+        dot.style.opacity = 1;
+      }
+    }, delay + index * 800);
   });
 }
-
 
   function pulseAudioIndicator() {
     pulseDot.animate([
@@ -144,6 +161,18 @@
       iterations: Infinity
     });
   }
+
+  function toggleMute() {
+  const btn = document.querySelector("#muteToggle button");
+  if (audio.muted) {
+    audio.muted = false;
+    btn.textContent = "🔇 Mute Audio";
+  } else {
+    audio.muted = true;
+    btn.textContent = "🔊 Unmute Audio";
+  }
+}
+
 </script>
   
 
@@ -169,6 +198,9 @@
         where abstraction meets the trace of a landscape. The brush doesn’t remember, but the pigment does.
       </p>
     </div>
+    <div class="wayfinding-dot" style="margin-top: 2rem; text-align: center;">
+  <div class="dot" style="width: 10px; height: 10px; border-radius: 50%; margin: auto;"></div>
+    </div>
   </section>
 
   <!-- Painting 2: Text Left, Image Right -->
@@ -182,6 +214,9 @@
     </div>
     <div class="image-block">
       <img src="https://images.squarespace-cdn.com/content/66120ea972ecf22fb3fe3cf7/1716404648100-JCIMWT6GAO4LJRTKTDF7/20240402_152956.jpg?content-type=image%2Fjpeg" alt="The Sky Above Château Laurier" />
+    </div>
+    <div class="wayfinding-dot" style="margin-top: 2rem; text-align: center;">
+  <div class="dot" style="width: 10px; height: 10px; border-radius: 50%; margin: auto;"></div>
     </div>
   </section>
 
@@ -211,7 +246,19 @@
       A study of presence in absence. A meditation on the warm glow of the unknown.
     </p>
   </div>
+
+  <div class="wayfinding-dot" style="margin-top: 2rem; text-align: center;">
+  <div class="dot" style="width: 10px; height: 10px; border-radius: 50%; margin: auto;"></div>
+</div>
+  
 </section>
+
+  <!-- 🔇 Mute/Unmute Toggle -->
+<div id="muteToggle" style="position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999; display: none;">
+  <button onclick="toggleMute()" style="background: #fff; border: 1px solid #ccc; padding: 6px 12px; font-family: 'Playfair Display'; cursor: pointer;">
+    🔇 Mute Audio
+  </button>
+</div>
 
   <!-- Outro -->
   <div class="outro">
