@@ -166,24 +166,24 @@
       const revealElements = document.querySelectorAll('.reveal');
       const revealObserver = new IntersectionObserver(
         entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-        
-            // 🔵 Show the dot inside the reveal block
-            const dot = entry.target.querySelector('.dot');
-            if (dot) {
-              dot.style.opacity = 1;
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+      
+              // Show the dot inside the reveal block
+              const dot = entry.target.querySelector('.dot');
+              if (dot) {
+                dot.style.opacity = 1;
+              }
+      
+              // This was the broken part:
+              revealObserver.unobserve(entry.target);
             }
-        
-            observer.unobserve(entry.target);
-          }
-        });
-
+          });
         },
         { threshold: 0.1 }
       );
-
+      
       revealElements.forEach(el => {
         revealObserver.observe(el);
       });
