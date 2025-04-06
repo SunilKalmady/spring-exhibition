@@ -155,42 +155,48 @@
 <div id="audioIndicator" style="position: fixed; top: 1rem; right: 1rem; width: 12px; height: 12px; background: #36c; border-radius: 50%; box-shadow: 0 0 8px #36c; z-index: 9998; display: none;"></div>
 
 <script>
-  const splash = document.getElementById("splash");
-  const audio = document.getElementById("ambientAudio");
-  const indicator = document.getElementById("audioIndicator");
-  const pulseDot = document.getElementById("audioPulse");
-
-  const revealElements = document.querySelectorAll('.reveal');
-  const revealObserver = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target); // Animate only once
-        }
-      });
-    },
-    { threshold: 0.1 }
-  );
-
-  revealElements.forEach(el => {
-    revealObserver.observe(el);
-  });
 
   function startExhibition() {
-  splash.style.transition = "opacity 1.5s ease";
-  splash.style.opacity = 0;
+    splash.style.transition = "opacity 1.5s ease";
+    splash.style.opacity = 0;
 
-  setTimeout(() => {
-    splash.style.display = "none";
-    audio.play();
+    setTimeout(() => {
+      splash.style.display = "none";
+      audio.play();
+      document.getElementById("muteToggle").style.display = "block";
 
-    if (indicator) indicator.style.display = "block";
-    document.getElementById("muteToggle").style.display = "block";
-    pulseAudioIndicator();
-    revealSectionsOneByOne();
-  }, 1600);
-}
+      // Scroll animations start after splash is gone
+      const revealElements = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      revealElements.forEach(el => {
+        revealObserver.observe(el);
+      });
+
+    }, 1600);
+  }
+
+
+  function toggleMute() {
+    const btn = document.querySelector("#muteToggle button");
+    if (audio.muted) {
+      audio.muted = false;
+      btn.textContent = "🔇 Mute Audio";
+    } else {
+      audio.muted = true;
+      btn.textContent = "🔊 Unmute Audio";
+    }
+  }
 
 function revealSectionsOneByOne() {
   const sections = document.querySelectorAll("section");
@@ -219,17 +225,6 @@ function revealSectionsOneByOne() {
       iterations: Infinity
     });
   }
-
-  function toggleMute() {
-  const btn = document.querySelector("#muteToggle button");
-  if (audio.muted) {
-    audio.muted = false;
-    btn.textContent = "🔇 Mute Audio";
-  } else {
-    audio.muted = true;
-    btn.textContent = "🔊 Unmute Audio";
-  }
-}
 
 </script>
   
